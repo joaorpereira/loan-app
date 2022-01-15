@@ -1,11 +1,12 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 
-type InputProps = {
+export type InputProps = {
 	label: string;
 	value?: string | number;
 	fullWidth?: boolean;
 	placeholder?: string;
+	variant?: "outlined" | "standard" | "filled";
 	onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 };
 
@@ -14,6 +15,7 @@ const Input = ({
 	value,
 	fullWidth = false,
 	placeholder = "",
+	variant = "outlined",
 	onChange
 }: InputProps) => {
 	return (
@@ -22,7 +24,7 @@ const Input = ({
 			label={label}
 			placeholder={placeholder}
 			value={value}
-			variant="outlined"
+			variant={variant}
 			color="primary"
 			fullWidth={fullWidth}
 			onChange={onChange}
