@@ -1,0 +1,14 @@
+coverage
+node_modules
+.next
+.vscode
+.jest
+.babelrc
+tsconfig.json
+jest.config.js
+next-env.d.ts
+next.config.js
+package.json
+README.md
+.eslintrc.json
+.prettierrc
