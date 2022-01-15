@@ -5,6 +5,7 @@ export type InputProps = {
 	label: string;
 	value?: string | number;
 	fullWidth?: boolean;
+	required?: boolean;
 	placeholder?: string;
 	variant?: "outlined" | "standard" | "filled";
 	onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
@@ -16,7 +17,8 @@ const Input = ({
 	fullWidth = false,
 	placeholder = "",
 	variant = "outlined",
-	onChange
+	onChange,
+	required = false
 }: InputProps) => {
 	return (
 		<TextField
@@ -28,6 +30,7 @@ const Input = ({
 			color="primary"
 			fullWidth={fullWidth}
 			onChange={onChange}
+			required={required}
 		/>
 	);
 };
