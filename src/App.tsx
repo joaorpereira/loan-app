@@ -1,19 +1,13 @@
 import React from "react";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { theme } from "styles/theme";
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			App
+		</ThemeProvider>
 	);
 }
 
