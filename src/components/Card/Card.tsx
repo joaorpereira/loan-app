@@ -2,25 +2,48 @@ import React from "react";
 import Button from "components/Button";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Card, makeStyles, Theme } from "@material-ui/core";
+import { LoansAvailableProps } from "screens/LoanConfirmation/LoanConfirmation";
 
-const CardComponent = () => {
+export type CardProps = {
+	data: LoansAvailableProps;
+};
+
+const CardComponent = ({ data }: CardProps) => {
 	const classes = useStyles();
+
+	const {
+		lender,
+		monthlyPayments,
+		automobile,
+		originalAmount,
+		apr,
+		remainingMonths
+	} = data;
 	return (
 		<Card elevation={1} className={classes.card}>
 			<div className={classes.headerWrapper}>
-				<p className={classes.paragraph}>Santander Consumer USA</p>
-				<p className={classes.paragraph}>$409/month</p>
+				<p className={classes.paragraph}>{lender}</p>
+				<p className={classes.paragraph}>${monthlyPayments}/month</p>
 			</div>
 			<div className={classes.divider} />
 			<div className={classes.container}>
-				<img className={classes.image} src={""} alt="" />
-				<div className={classes.informationWrapper}>
-					<p className={classes.informationText}>
-						<b>2017 Toyota Prius ||</b>
-					</p>
-					<p className={`${classes.text} ${classes.margin}`}>
-						estimated <b>65,000 mi</b>
-					</p>
+				<div className={classes.box}>
+					<img
+						className={classes.image}
+						src={automobile.imageSource}
+						alt={`${automobile.make} ${automobile.model} ${automobile.year}`}
+					/>
+					<div className={classes.informationWrapper}>
+						<p className={classes.informationText}>
+							<b>
+								{automobile.year} {automobile.make.toLowerCase()}
+								{automobile.model.toLowerCase()}
+							</b>
+						</p>
+						<p className={`${classes.text} ${classes.margin}`}>
+							estimated <b>{originalAmount} mi</b>
+						</p>
+					</div>
 				</div>
 				<MoreVertIcon />
 			</div>
@@ -28,10 +51,11 @@ const CardComponent = () => {
 			<div className={classes.contentWrapper}>
 				<div className={classes.content}>
 					<p className={classes.text}>
-						APR <span className={classes.value}>$2.49%</span>
+						APR <span className={classes.value}>{apr}%</span>
 					</p>
 					<p className={`${classes.text} ${classes.borderTop}`}>
-						Time remaining <span className={classes.value}>85 mo</span>
+						Time remaining
+						<span className={classes.value}>{remainingMonths} mo</span>
 					</p>
 				</div>
 			</div>
@@ -66,7 +90,8 @@ const useStyles = makeStyles<Theme>((theme) => ({
 	},
 	informationText: {
 		fontSize: ".9rem",
-		margin: 0
+		margin: 0,
+		textTransform: "capitalize"
 	},
 	borderTop: {
 		paddingTop: "10px",
@@ -98,12 +123,17 @@ const useStyles = makeStyles<Theme>((theme) => ({
 		height: "3rem",
 		width: "3rem",
 		borderRadius: "8px",
-		objectFit: "cover"
+		objectFit: "cover",
+		marginRight: "10px"
 	},
 	container: {
 		display: "flex",
 		justifyContent: "space-between",
 		alignItems: "center",
 		padding: "20px"
+	},
+	box: {
+		display: "flex",
+		alignItems: "center"
 	}
 }));
