@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "store/store";
 import api from "services/api";
 
@@ -38,6 +39,7 @@ export type LoansAvailableProps = {
 
 const LoanConfirmation = () => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 	const { offerId } = useStore();
 
 	const [error, setError] = useState("");
@@ -57,13 +59,15 @@ const LoanConfirmation = () => {
 	useEffect(() => {
 		if (offerId) {
 			getLoans();
+		} else {
+			navigate("/");
 		}
-	}, [offerId, getLoans]);
+	}, [offerId, getLoans, navigate]);
 
 	return (
 		<section className={classes.root}>
 			{error ? (
-				<p>{error}</p>
+				<p className={classes.error}>{error}</p>
 			) : (
 				<>
 					<HeaderSuccess />
@@ -82,7 +86,7 @@ const LoanConfirmation = () => {
 					<div className={classes.cardWrapper}>
 						<Grid container spacing={2}>
 							{loansAvailable.map((item) => (
-								<Grid item xs={12} md={3} lg={3} key={item.id}>
+								<Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
 									<Card data={item} />
 								</Grid>
 							))}
@@ -126,6 +130,11 @@ const useStyles = makeStyles(() => ({
 	},
 	text: {
 		fontSize: "1.3rem",
+		margin: 0
+	},
+	error: {
+		textAlign: "center",
+		color: "red",
 		margin: 0
 	}
 }));
