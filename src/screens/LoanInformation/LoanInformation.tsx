@@ -1,12 +1,110 @@
-import React from "react";
-import { Grid, makeStyles, Theme } from "@material-ui/core";
+import React, { useState, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useStore } from "store/store";
+import api from "services/api";
+
 import Button from "components/Button";
 import Header from "components/Header";
 import Input from "components/Input";
 import Select from "components/Select";
 
+import { Grid, makeStyles, Theme } from "@material-ui/core";
+import { amountFormatter, formatter } from "helpers/formatCurrency";
+
+export type ContentProps = {
+	apr: number;
+	id: string;
+	monthlyPayments: number;
+};
+
 const LoanInformation = () => {
 	const classes = useStyles();
+	const { setOfferId } = useStore();
+	const navigate = useNavigate();
+
+	const [loanPurpose, setLoanPurpose] = useState("");
+	const [amount, setAmount] = useState("");
+	const [terms, setTerms] = useState("");
+	const [error, setError] = useState("");
+	const [content, setContent] = useState<ContentProps | null>(null);
+
+	const handleLoanPurpose = (
+		e: React.ChangeEvent<{
+			name?: string | undefined;
+			value: unknown;
+		}>
+	) => {
+		setLoanPurpose(e.target.value as string);
+	};
+
+	const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = ("$" + formatter(e.target.value)) as string;
+		setAmount(newValue);
+	};
+
+	const handleTerms = (
+		e: React.ChangeEvent<{
+			name?: string | undefined;
+			value: unknown;
+		}>
+	) => {
+		setTerms(e.target.value as string);
+	};
+
+	const handleContent = useCallback(async () => {
+		try {
+			const res = await api.post("/offers", {
+				loanPurpose,
+				amount: amountFormatter(amount),
+				terms: Number(terms)
+			});
+			setContent(res.data);
+		} catch (err: any) {
+			setError(err.message);
+		}
+	}, [loanPurpose, amount, terms]);
+
+	useEffect(() => {
+		if (loanPurpose && amount && terms) {
+			handleContent();
+		}
+	}, [loanPurpose, amount, terms, handleContent]);
+
+	useEffect(() => {
+		if (!content) {
+			setOfferId("");
+		}
+	}, [content, setOfferId]);
+
+	useEffect(() => {
+		if (loanPurpose || amount || terms) {
+			setError("");
+		}
+	}, [loanPurpose, amount, terms]);
+
+	const handleSubmitLoan = async () => {
+		try {
+			if (!loanPurpose || !amount || !terms) {
+				throw new Error("Please review your fields");
+			}
+			const res = await api.post("/submissions", {
+				loanPurpose,
+				amount: amountFormatter(amount),
+				terms: Number(terms),
+				offerId: content?.id
+			});
+			const id = res.data.userId as string;
+			setOfferId(id);
+			navigate("/confirmation");
+		} catch (err: any) {
+			let message = err.message as string;
+			if (message === "Request failed with status code 500") {
+				message = "Something went wrong. Please review you fields";
+			}
+			setError(message);
+		}
+	};
+
 	return (
 		<section>
 			<Header title="Loan Information" />
@@ -21,6 +119,8 @@ const LoanInformation = () => {
 						required
 						fullWidth
 						label="Loan purpose"
+						value={loanPurpose}
+						onChange={handleLoanPurpose}
 						options={[
 							{ value: "Debt Consolidation", label: "Debt Consolidation" },
 							{ value: "Personal", label: "Personal" },
@@ -29,13 +129,21 @@ const LoanInformation = () => {
 					/>
 				</Grid>
 				<Grid item xs={12} md={12} lg={12}>
-					<Input required fullWidth label="Total loan amount" />
+					<Input
+						required
+						fullWidth
+						value={amount}
+						onChange={handleAmount}
+						label="Total loan amount"
+					/>
 				</Grid>
 				<Grid item xs={12} md={12} lg={12}>
 					<Select
 						required
 						fullWidth
 						label="Loan term (months)"
+						value={terms}
+						onChange={handleTerms}
 						options={[
 							{ value: "12", label: "12 months" },
 							{ value: "24", label: "24 months" },
@@ -48,11 +156,12 @@ const LoanInformation = () => {
 					<div className={classes.content}>
 						<p className={classes.text}>
 							Monthly payment
-							<span className={classes.value}>$85</span>
+							<span className={classes.value}>${content?.monthlyPayments}</span>
 						</p>
 						<p className={classes.text}>
-							APR <span className={classes.value}>$2.49%</span>
+							APR <span className={classes.value}>{content?.apr}%</span>
 						</p>
+						{!!error && <p className={classes.error}>{error}</p>}
 					</div>
 				</Grid>
 				<Grid item xs={12} md={12} lg={12}>
@@ -64,7 +173,12 @@ const LoanInformation = () => {
 					</p>
 				</Grid>
 				<Grid item xs={12} md={6} lg={6}>
-					<Button fullWidth height="56px" borderRadius="50px">
+					<Button
+						fullWidth
+						height="56px"
+						borderRadius="50px"
+						onClick={handleSubmitLoan}
+					>
 						Submit Application
 					</Button>
 				</Grid>
@@ -92,7 +206,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
 		fontSize: ".9rem"
 	},
 	content: {
-		height: "80px"
+		height: "100px"
 	},
 	value: {
 		float: "right",
@@ -104,5 +218,10 @@ const useStyles = makeStyles<Theme>((theme) => ({
 		paddingTop: "10px",
 		color: theme.palette.secondary.main,
 		fontSize: ".9rem"
+	},
+	error: {
+		textAlign: "center",
+		color: "red",
+		margin: 0
 	}
 }));
