@@ -1,6 +1,7 @@
 import React from "react";
-import SavingsImage from "assets/savings.png";
+import Card from "components/Card";
 import HeaderSuccess from "components/HeaderSuccess";
+import SavingsImage from "assets/savings.png";
 import { makeStyles } from "@material-ui/core";
 
 const LoanConfirmation = () => {
@@ -20,6 +21,9 @@ const LoanConfirmation = () => {
 				<h2 className={classes.text}>You could be saving money</h2>
 				<p className={classes.text}>on your existing loans</p>
 			</div>
+			<div className={classes.cardWrapper}>
+				<Card />
+			</div>
 		</section>
 	);
 };
@@ -29,12 +33,15 @@ export default LoanConfirmation;
 const useStyles = makeStyles(() => ({
 	root: {
 		backgroundColor: "#f2f2f2",
-		height: "100vh"
+		height: "100%"
 	},
 	container: {
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center"
+	},
+	cardWrapper: {
+		padding: "40px 35px"
 	},
 	button: {
 		backgroundColor: "#ffc941",
