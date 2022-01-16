@@ -51,6 +51,7 @@ const LoanConfirmation = () => {
 		try {
 			const res = await api.get(`/loans?userId=${offerId}`);
 			setLoansAvailable(res.data.loansAvailable);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			setError(err.message);
 		}

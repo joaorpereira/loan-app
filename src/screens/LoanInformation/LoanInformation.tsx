@@ -59,6 +59,7 @@ const LoanInformation = () => {
 				terms: Number(terms)
 			});
 			setContent(res.data);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			setError(err.message);
 		}
@@ -96,6 +97,7 @@ const LoanInformation = () => {
 			const id = res.data.userId as string;
 			setOfferId(id);
 			navigate("/confirmation");
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			let message = err.message as string;
 			if (message === "Request failed with status code 500") {

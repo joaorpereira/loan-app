@@ -12,7 +12,7 @@ export default {
 	}
 } as Meta;
 
-const data: LoansAvailableProps = {
+export const data: LoansAvailableProps = {
 	id: "b53d2b7d-febc-4f19-8633-7be9b0af02d1",
 	lender: "SANTANDER CONSUMER USA",
 	apr: "18.3",

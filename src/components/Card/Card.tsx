@@ -37,7 +37,7 @@ const CardComponent = ({ data }: CardProps) => {
 						<div className={classes.informationWrapper}>
 							<p className={classes.informationText}>
 								<b>
-									{automobile.year} {automobile.make.toLowerCase()}
+									{automobile.year} {automobile.make.toLowerCase()}{" "}
 									{automobile.model.toLowerCase()}
 								</b>
 							</p>
@@ -62,7 +62,9 @@ const CardComponent = ({ data }: CardProps) => {
 				</div>
 			</div>
 			<div className={classes.buttonWrapper}>
-				<Button fullWidth>Start Saving</Button>
+				<Button fullWidth borderRadius="8px">
+					Start Saving
+				</Button>
 			</div>
 		</Card>
 	);
