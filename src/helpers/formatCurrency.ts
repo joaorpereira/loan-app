@@ -5,5 +5,11 @@ export const formatter = (value: string) => {
 			.replace(/(?<=\..*)\./g, "")
 			.replace(/(?<=\.\d\d).*/g, "")
 			.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	} else {
+		return "";
 	}
+};
+
+export const amountFormatter = (value: string) => {
+	return Number(value.replace(/[^\d.]/g, ""));
 };
