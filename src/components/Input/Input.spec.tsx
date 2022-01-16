@@ -16,7 +16,7 @@ describe("<Input/>", () => {
 		expect(onChangeMock).toHaveBeenCalledTimes(4);
 	});
 
-	it("should have placeholderr value 'Type here...'", () => {
+	it("should have placeholder value 'Type here...'", () => {
 		render(<Input label="Loan purpose" placeholder="Type here..." />);
 
 		const input: HTMLInputElement =

@@ -18,7 +18,7 @@ export default {
 	}
 } as Meta;
 
-export const options: OptionsProps[] = [
+const options: OptionsProps[] = [
 	{ value: "Debt Consolidation", label: "Debt Consolidation" },
 	{ value: "Personal", label: "Personal" },
 	{ value: "API error", label: "API error" }
