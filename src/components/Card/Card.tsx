@@ -21,42 +21,44 @@ const CardComponent = ({ data }: CardProps) => {
 	} = data;
 	return (
 		<Card elevation={1} className={classes.card}>
-			<div className={classes.headerWrapper}>
-				<p className={classes.paragraph}>{lender}</p>
-				<p className={classes.paragraph}>${monthlyPayments}/month</p>
-			</div>
-			<div className={classes.divider} />
-			<div className={classes.container}>
-				<div className={classes.box}>
-					<img
-						className={classes.image}
-						src={automobile.imageSource}
-						alt={`${automobile.make} ${automobile.model} ${automobile.year}`}
-					/>
-					<div className={classes.informationWrapper}>
-						<p className={classes.informationText}>
-							<b>
-								{automobile.year} {automobile.make.toLowerCase()}
-								{automobile.model.toLowerCase()}
-							</b>
+			<div>
+				<div className={classes.headerWrapper}>
+					<p className={classes.paragraph}>{lender}</p>
+					<p className={classes.paragraph}>${monthlyPayments}/month</p>
+				</div>
+				<div className={classes.divider} />
+				<div className={classes.container}>
+					<div className={classes.box}>
+						<img
+							className={classes.image}
+							src={automobile.imageSource}
+							alt={`${automobile.make} ${automobile.model} ${automobile.year}`}
+						/>
+						<div className={classes.informationWrapper}>
+							<p className={classes.informationText}>
+								<b>
+									{automobile.year} {automobile.make.toLowerCase()}
+									{automobile.model.toLowerCase()}
+								</b>
+							</p>
+							<p className={`${classes.text} ${classes.margin}`}>
+								estimated <b>{originalAmount} mi</b>
+							</p>
+						</div>
+					</div>
+					<MoreVertIcon />
+				</div>
+				<div className={classes.divider} />
+				<div className={classes.contentWrapper}>
+					<div className={classes.content}>
+						<p className={classes.text}>
+							APR <span className={classes.value}>{apr}%</span>
 						</p>
-						<p className={`${classes.text} ${classes.margin}`}>
-							estimated <b>{originalAmount} mi</b>
+						<p className={`${classes.text} ${classes.borderTop}`}>
+							Time remaining
+							<span className={classes.value}>{remainingMonths} mo</span>
 						</p>
 					</div>
-				</div>
-				<MoreVertIcon />
-			</div>
-			<div className={classes.divider} />
-			<div className={classes.contentWrapper}>
-				<div className={classes.content}>
-					<p className={classes.text}>
-						APR <span className={classes.value}>{apr}%</span>
-					</p>
-					<p className={`${classes.text} ${classes.borderTop}`}>
-						Time remaining
-						<span className={classes.value}>{remainingMonths} mo</span>
-					</p>
 				</div>
 			</div>
 			<div className={classes.buttonWrapper}>
@@ -70,7 +72,11 @@ export default CardComponent;
 
 const useStyles = makeStyles<Theme>((theme) => ({
 	card: {
-		borderRadius: "8px"
+		borderRadius: "8px",
+		minHeight: "350px",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "space-between"
 	},
 	paragraph: {
 		textAlign: "center",
