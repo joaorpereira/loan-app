@@ -3,11 +3,12 @@ import { Grid, makeStyles, Theme } from "@material-ui/core";
 import Button from "components/Button";
 import Header from "components/Header";
 import Input from "components/Input";
+import Select from "components/Select";
 
 const LoanInformation = () => {
 	const classes = useStyles();
 	return (
-		<div>
+		<section>
 			<Header title="Loan Information" />
 			<Grid
 				className={classes.container}
@@ -15,16 +16,35 @@ const LoanInformation = () => {
 				spacing={3}
 				justifyContent="center"
 			>
-				<Grid item xs={12} md={6} lg={6}>
-					<Input required fullWidth label="Loan purpose" />
+				<Grid item xs={12} md={12} lg={12}>
+					<Select
+						required
+						fullWidth
+						label="Loan purpose"
+						options={[
+							{ value: "Debt Consolidation", label: "Debt Consolidation" },
+							{ value: "Personal", label: "Personal" },
+							{ value: "API error", label: "API error" }
+						]}
+					/>
 				</Grid>
-				<Grid item xs={12} md={6} lg={6}>
+				<Grid item xs={12} md={12} lg={12}>
 					<Input required fullWidth label="Total loan amount" />
 				</Grid>
-				<Grid item xs={12} md={6} lg={6}>
-					<Input required fullWidth label="Loan term (months)" />
+				<Grid item xs={12} md={12} lg={12}>
+					<Select
+						required
+						fullWidth
+						label="Loan term (months)"
+						options={[
+							{ value: "12", label: "12 months" },
+							{ value: "24", label: "24 months" },
+							{ value: "36", label: "36 months" },
+							{ value: "48", label: "48 months" }
+						]}
+					/>
 				</Grid>
-				<Grid item xs={12} md={6} lg={6}>
+				<Grid item xs={12} md={12} lg={12}>
 					<div className={classes.content}>
 						<p className={classes.text}>
 							Monthly payment
@@ -35,7 +55,7 @@ const LoanInformation = () => {
 						</p>
 					</div>
 				</Grid>
-				<Grid item xs={12} md={6} lg={6}>
+				<Grid item xs={12} md={12} lg={12}>
 					<p className={classes.paragraph}>
 						Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry standard dummy text ever
@@ -49,7 +69,7 @@ const LoanInformation = () => {
 					</Button>
 				</Grid>
 			</Grid>
-		</div>
+		</section>
 	);
 };
 
@@ -59,7 +79,11 @@ const useStyles = makeStyles<Theme>((theme) => ({
 	container: {
 		padding: "40px 35px",
 		margin: "0",
-		width: "100%"
+		width: "100%",
+		[theme.breakpoints.up("md")]: {
+			width: "700px",
+			margin: "0 auto"
+		}
 	},
 	paragraph: {
 		textAlign: "justify",
