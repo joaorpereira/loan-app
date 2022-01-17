@@ -61,7 +61,7 @@ const LoanInformation = () => {
 			setContent(res.data);
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
-			setError(err.message);
+			setError("Something went wrong");
 		}
 	}, [loanPurpose, amount, terms]);
 
@@ -99,11 +99,7 @@ const LoanInformation = () => {
 			navigate("/confirmation");
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
-			let message = err.message as string;
-			if (message === "Request failed with status code 500") {
-				message = "Something went wrong. Please review you fields";
-			}
-			setError(message);
+			setError("Something went wrong. Please review your fields");
 		}
 	};
 
@@ -155,16 +151,20 @@ const LoanInformation = () => {
 					/>
 				</Grid>
 				<Grid item xs={12} md={12} lg={12}>
-					<div className={classes.content}>
-						<p className={classes.text}>
-							Monthly payment
-							<span className={classes.value}>${content?.monthlyPayments}</span>
-						</p>
-						<p className={classes.text}>
-							APR <span className={classes.value}>{content?.apr}%</span>
-						</p>
-						{!!error && <p className={classes.error}>{error}</p>}
-					</div>
+					{!!content && (
+						<div className={classes.content}>
+							<p className={classes.text}>
+								Monthly payment
+								<span className={classes.value}>
+									${content?.monthlyPayments}
+								</span>
+							</p>
+							<p className={classes.text}>
+								APR <span className={classes.value}>{content?.apr}%</span>
+							</p>
+						</div>
+					)}
+					{!!error && <p className={classes.error}>{error}</p>}
 				</Grid>
 				<Grid item xs={12} md={12} lg={12}>
 					<p className={classes.paragraph}>
