@@ -44,8 +44,9 @@ Their data is from Unplash API: https://clutch-interview-service.herokuapp.com/
 ---
 #### 💻 FrontEnd
 
-![](loan-app.gif)
-
+<p align="center">
+  <img src="loan-app.gif" alt="animated" />
+</p>
 ---
 ### 🛠 Technologies
 
