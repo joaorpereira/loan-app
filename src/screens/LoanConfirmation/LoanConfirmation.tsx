@@ -53,16 +53,13 @@ const LoanConfirmation = () => {
 			setLoansAvailable(res.data.loansAvailable);
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
-			setError(err.message);
+			setError("Something went wrong");
 		}
 	}, [offerId]);
 
 	useEffect(() => {
-		if (offerId) {
-			getLoans();
-		} else {
-			navigate("/");
-		}
+		if (offerId) getLoans();
+		else navigate("/");
 	}, [offerId, getLoans, navigate]);
 
 	return (
