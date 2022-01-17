@@ -20,7 +20,7 @@ const CardComponent = ({ data }: CardProps) => {
 		remainingMonths
 	} = data;
 	return (
-		<Card elevation={1} className={classes.card}>
+		<Card elevation={1} className={classes.card} data-testid="custom-card">
 			<div>
 				<div className={classes.headerWrapper}>
 					<p className={classes.paragraph}>{lender}</p>
