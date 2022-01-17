@@ -9,7 +9,7 @@ import Input from "components/Input";
 import Select from "components/Select";
 
 import { Grid, makeStyles, Theme } from "@material-ui/core";
-import { amountFormatter, formatter } from "helpers/formatCurrency";
+import { amountFormatter, formatter } from "helpers";
 
 export type ContentProps = {
 	apr: number;
