@@ -4,21 +4,21 @@
 
 <p align="center">
   <a href="https://www.linkedin.com/in/joaorpereira/">
-    <img 
-        alt="Made by Joao Paulo" 
+    <img
+        alt="Made by Joao Paulo"
         src="https://img.shields.io/badge/MADE%20BY-Joao%20Paulo-%230077b5?style=flat-square&logo=linkedin">
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-%20brightgreen?style=flat-square&logo=">
 
   <a href="https://www.typescriptlang.org/">
-    <img 
-        alt="Typescript" 
+    <img
+        alt="Typescript"
         src="https://img.shields.io/badge/Stack-Typescript-%23007ACC?style=flat-square&logo=typescript">
   </a>
   <a href="#">
-    <img 
-        alt="React" 
+    <img
+        alt="React"
         src="https://img.shields.io/badge/Web-React-%23007ACC?style=flat-square&logo=REACT">
   </a>
 </p>
@@ -27,8 +27,8 @@
 
 <p align="center">
  <a href="#-about">About</a> •
- <a href="#-technologies">Technologies</a> • 
- <a href="#-how-to-download-the-project">How to download the project</a> • 
+ <a href="#-technologies">Technologies</a> •
+ <a href="#-how-to-download-the-project">How to download the project</a> •
  <a href="#-license">License</a>
 </p>
 
@@ -65,7 +65,7 @@ The following technologies/tools were used:
 ### 📎 How to download the project
 
 ##### 👉 Tools needed:
-- [Vscode](https://code.visualstudio.com/) was used in this project; 
+- [Vscode](https://code.visualstudio.com/) was used in this project;
 - [Node.Js](https://nodejs.org/en/) - Installed on your machine;
 - [Git](https://git-scm.com/downloads) - Installed on your machine;
 
@@ -74,9 +74,6 @@ The following technologies/tools were used:
 ```bash
 
 #->In the terminal:
-
-# Clone repository:
-$ git clone https://github.com/joaorpereira/loan-app.git
 
 # Install dependencies:
 $ yarn
