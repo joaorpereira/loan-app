@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { server } from '../__mocks__/server'
+import { server } from '../src/__mocks__/server'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }))
 afterEach(() => server.resetHandlers())
